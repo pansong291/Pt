@@ -1,10 +1,9 @@
 package pansong291.pt.ui;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.EditText;
 import pansong291.pt.R;
 import pansong291.crash.CrashApplication;
-import android.widget.EditText;
 
 public class CrashActivity extends Zactivity
 {
