@@ -8,8 +8,8 @@ android {
         applicationId "pansong291.pt"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 20161030
+        versionName "1.0beta"
     }
     buildTypes {
         release {

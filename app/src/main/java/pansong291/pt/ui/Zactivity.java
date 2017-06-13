@@ -1,13 +1,23 @@
 package pansong291.pt.ui;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import pansong291.crash.ActivityControl;
+import android.text.ClipboardManager;
+import android.util.Log;
 import android.widget.Toast;
+import pansong291.crash.ActivityControl;
 
 public class Zactivity extends Activity
 {
- android.text.ClipboardManager mcbm;
+ int VERSION_CODE;
+ String VERSION_NAME;
+ ClipboardManager mcbm;
+ public SharedPreferences sp;
+ 
+ public final String V_CODE="v_code",QZGX="qzGX",CLICK_MOVE="click_move";
+ 
  @Override
  protected void onResume()
  {
@@ -21,7 +31,18 @@ public class Zactivity extends Activity
   super.onCreate(savedInstanceState);
   ActivityControl.getActivityControl().addActivity(this);
   
-  mcbm=(android.text.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+  mcbm=(ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+  
+  sp=getSharedPreferences(getPackageName()+"_preferences",0);
+  
+  try{
+   PackageInfo pi=getPackageManager().getPackageInfo(getPackageName(),0);
+   VERSION_CODE=pi.versionCode;
+   VERSION_NAME=pi.versionName;
+  }catch(Exception e)
+  {
+   Log.e("VersionInfo","Exception",e);    
+  }
  }
 
  @Override

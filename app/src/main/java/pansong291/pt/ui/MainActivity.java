@@ -1,11 +1,9 @@
 package pansong291.pt.ui;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +24,9 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 import pansong291.pt.R;
 import pansong291.pt.other.MultiClick;
+import pansong291.pt.other.MyProclamation;
+import pansong291.pt.other.MyUpdata;
+import pansong291.pt.other.MyUpdataDialogListener;
 import pansong291.pt.view.SelectView;
 
 public class MainActivity extends Zactivity
@@ -104,6 +105,35 @@ public class MainActivity extends Zactivity
 	setImgFitCenter();
    }
   };
+  
+  int oldVerCode=sp.getInt(V_CODE,99999999);
+  if(oldVerCode<VERSION_CODE)
+  {
+   //用户更新了本应用
+   new AlertDialog.Builder(this)
+    .setTitle("版本升级")
+    .setMessage(String.format("感谢您对本应用的支持！\n本应用已成功升级到%1$s版本。\n%2$s",VERSION_NAME,getString(R.string.update_msg)))
+    .setPositiveButton("确定",null)
+    .show();
+  }else if(oldVerCode==99999999)
+  {
+   //用户第一次安装本应用
+   new AlertDialog.Builder(this)
+    .setTitle("声明")
+    .setMessage(String.format("感谢您安装本应用！\n%s",getString(R.string.hello_user)))
+    .setPositiveButton("确定",null)
+    .show();
+  }
+  sp.edit().putInt(V_CODE,VERSION_CODE).commit();
+
+  //公告相关
+  LinearLayout llt=(LinearLayout)findViewById(R.id.main_gg);
+  new MyProclamation(this,"RyOATtQ",llt).start();
+
+  //更新相关
+  if(sp.getBoolean("自动检查更新的选项",true)||sp.getBoolean(QZGX,false))
+   new MyUpdata(this,"RyOAlwR",new MyUpdataDialogListener(this)).checkNow(false,null);
+   
   try{
    Pcpath=getIntent().getData().getPath();
    Pcname=Pcpath.substring(Pcpath.lastIndexOf("/")+1);
@@ -117,6 +147,7 @@ public class MainActivity extends Zactivity
   setImgFitCenter();
   setLayoutPosition(0,0,0,0);
   Pcsize=mbitmap.getWidth()+"*"+mbitmap.getHeight();
+  mtb2.setChecked(sp.getBoolean(CLICK_MOVE,false));
  }
 
  public void setImgFitCenter()
@@ -352,6 +383,7 @@ public class MainActivity extends Zactivity
   */
  }
  
+ //复制颜色值
  public void onTextClick(View v)
  {
   String ss=((TextView)v).getText().toString();
@@ -485,6 +517,7 @@ public class MainActivity extends Zactivity
   {
    if(mbitmap!=null)
     mbitmap.recycle();
+   sp.edit().putBoolean(CLICK_MOVE,mtb2.isChecked()).commit();
    finish();
    System.exit(0);
   }

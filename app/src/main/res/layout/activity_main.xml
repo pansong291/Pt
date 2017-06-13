@@ -121,7 +121,8 @@
 		android:id="@+id/mMenu1"
 		android:visibility="visible"
 		android:background="#FFFFFF"
-		android:layout_alignParentBottom="true">
+		android:layout_alignParentBottom="true"
+		android:gravity="center">
 
 		<Button
 			android:layout_height="wrap_content"
@@ -147,7 +148,7 @@
 			android:onClick="onPcMsg"
 			android:textOn="移动"
 			android:textOff="点击"
-			android:checked="true"
+			android:checked="false"
 			android:layout_width="wrap_content"/>
 
 		<Button
@@ -157,6 +158,12 @@
 			android:id="@+id/mPcXiangQ"
 			android:onClick="onPcMsg"
 			android:layout_width="wrap_content"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:id="@+id/main_gg"/>
 
 	</LinearLayout>
 

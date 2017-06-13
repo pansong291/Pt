@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Pt</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_user">本应用可以获取一张图片上某点的坐标与该点的颜色值。</string>
+    <string name="app_info">本应用由pansong291PS开发，你可以通过邮箱与开发者取得联系。</string>
+    <string name="update_msg"></string>
     
     <color name="color_alpha">#00000000</color>
     <color name="color_btn_down">#9934b6e4</color>
