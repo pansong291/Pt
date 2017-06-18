@@ -9,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 20161030
-        versionName "1.0beta"
+        versionName "1.0-beta"
     }
     buildTypes {
         release {
