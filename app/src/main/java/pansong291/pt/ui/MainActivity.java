@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,6 +32,9 @@ import pansong291.pt.view.SelectView;
 
 public class MainActivity extends Zactivity
 {
+ int VERSION_CODE;
+ String VERSION_NAME;
+ 
  ImageView mimg;
  SelectView msv;
  LinearLayout mLayout1,mLayout2;
@@ -105,6 +109,14 @@ public class MainActivity extends Zactivity
 	setImgFitCenter();
    }
   };
+  
+  try{
+   PackageInfo pi=getPackageManager().getPackageInfo(getPackageName(),0);
+   VERSION_CODE=pi.versionCode;
+   VERSION_NAME=pi.versionName;
+  }catch(Exception e)
+  {
+  }
   
   int oldVerCode=sp.getInt(V_CODE,99999999);
   if(oldVerCode<VERSION_CODE)
